@@ -1,3 +1,4 @@
+import pytest
 from calculator import add, subtract, multiply, divide, power
 
 def test_add():
@@ -15,7 +16,8 @@ def test_multiply():
 
 def test_divide():
     assert divide(10, 2) == 5
-    assert divide(10, 0) == "Error: Division by zero"
+    with pytest.raises(ValueError):
+        divide(10, 0)
 
 def test_large_numbers():
     assert multiply(1000000, 1000000) == 1000000000000
