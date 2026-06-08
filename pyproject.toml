@@ -12,16 +12,19 @@ license = {text = "MIT"}
 requires-python = ">=3.10"
 classifiers = ["Programming Language :: Python :: 3"]
 
-[tool.setuptools]
-py-modules = ["calculator"]
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
 testpaths = ["tests"]
 
 [tool.coverage.run]
-source = ["."]
+source = ["src"]
 
 [tool.coverage.report]
 fail_under = 80
 show_missing = true
+
+[tool.black]
+target-version = ['py312']
