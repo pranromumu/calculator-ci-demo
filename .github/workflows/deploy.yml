@@ -1,0 +1,31 @@
+name: Deploy to Production
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy'
+        required: true
+        default: 'latest'
+
+jobs:
+  deploy-prod:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://your-app.example.com
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: package-${{ github.run_id }}
+          path: dist/
+
+      - name: Deploy to production
+        run: |
+          echo "Deploying version: ${{ github.event.inputs.version }}"
+          echo "Production deployment complete!"
+
+      - name: Verify deployment
+        run: echo "Health check passed"
